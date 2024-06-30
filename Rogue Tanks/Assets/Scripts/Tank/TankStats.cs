@@ -37,7 +37,6 @@ public class TankStats : MonoBehaviour
     {
         if(lavaStartTime >= 0 && Time.time - lavaStartTime > LavaTimer)
         {
-            Debug.Log($"[Lava] Destroyed tank by lava!");
             HitTank();
             ResetLava();
         }
