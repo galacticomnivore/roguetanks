@@ -29,6 +29,7 @@ public abstract class BaseTank
         weaponController.Initialize(gameEngine, spriteController, tank.GetComponent<Tank>());
         tankMovementController = tank.GetComponent<TankMovementController>();
         tankMovementController.SpriteController = spriteController;
+        tankMovementController.TankStats = tankStats;
 
         spriteController.Raycasts.SetCollisionMasks("Ground", "Player", "Enemy", "Tile", "WaterTile");
     }

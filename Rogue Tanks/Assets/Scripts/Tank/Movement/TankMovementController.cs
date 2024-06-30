@@ -1,12 +1,32 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TankMovementController : MonoBehaviour
 {
     private Vector3 MovementDirection = Vector3.up;
-    public float Speed = 10.0f;
+    public float BaseSpeed = 10.0f;
     public SpriteController SpriteController { get; set; }
     public IInputActionController Movement = new NoActions();
+    public TankStats TankStats { get; set; }
+
+    public float Speed
+    {
+        get
+        {
+            float speed = BaseSpeed;
+            List<StatEffect> effects = TankStats.GetStatEffects(StatType.Speed);
+            if(effects != null)
+            {
+                for(int i = 0; i < effects.Count; i++)
+                {
+                    speed = effects[i].CalculateValue(speed);
+                }
+            }
+            Debug.Log($"[Tank] Speed: {speed}");
+            return speed;
+        }
+    }
 
     private void MoveUp()
     {

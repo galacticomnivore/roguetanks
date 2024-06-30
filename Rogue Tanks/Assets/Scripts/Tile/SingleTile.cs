@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SingleTile : MonoBehaviour
 {
+    public List<StatEffect> StatEffects;
+
     public void Initialize(Sprite sprite, string collisionLayer)
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
@@ -20,6 +23,14 @@ public class SingleTile : MonoBehaviour
         {
             collision.gameObject.GetComponentInChildren<TankStats>().IncrementLavaCounter();
         }
+        else if(gameObject.layer == LayerMask.NameToLayer("MudTile"))
+        {
+            var tankStats = collision.gameObject.GetComponentInChildren<TankStats>();
+            if(tankStats != null)
+            {
+                StatEffects.ForEach(x => tankStats.AddStatEffect(x, false));
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -31,6 +42,14 @@ public class SingleTile : MonoBehaviour
         else if(gameObject.layer == LayerMask.NameToLayer("LavaTile"))
         {
             collision.gameObject.GetComponentInChildren<TankStats>().DecrementLavaCounter();
+        }
+        else if(gameObject.layer == LayerMask.NameToLayer("MudTile"))
+        {
+            var tankStats = collision.gameObject.GetComponentInChildren<TankStats>();
+            if(tankStats != null)
+            {
+                StatEffects.ForEach(x => tankStats.RemoveStatEffect(x.Tag));
+            }
         }
     }
 }

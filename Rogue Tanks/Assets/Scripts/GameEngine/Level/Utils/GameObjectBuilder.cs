@@ -26,7 +26,8 @@ public class GameObjectBuilder
             { 9, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank4("2", gameEngine)) },
             { 10, pos => gameEngine.GameFactory.CreateTankBase(pos, _ => { }) },
             { 11, pos => gameEngine.GameFactory.CreateIce(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
-            { 12, pos => gameEngine.GameFactory.CreateLava(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) }
+            { 12, pos => gameEngine.GameFactory.CreateLava(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
+            { 13, pos => gameEngine.GameFactory.CreateMud(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) }
         };
     }
 

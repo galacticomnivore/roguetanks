@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TankStats : MonoBehaviour
@@ -25,6 +26,8 @@ public class TankStats : MonoBehaviour
             UpdateLava();
         }
     }
+
+    public List<StatEffect> StatEffects = new List<StatEffect>();
 
     public void Initialize(int tankType, int lives)
     {
@@ -83,6 +86,24 @@ public class TankStats : MonoBehaviour
 
     public void AddPoint(int destroyedTankType)=>
         tankPoints.AddValue(destroyedTankType, 1);
+
+    public void AddStatEffect(StatEffect statEffect, bool stackable = false)
+    {
+        if(stackable || !StatEffects.Exists(x => x.Tag == statEffect.Tag))
+        {
+            StatEffects.Add(statEffect);
+        }
+    }
+
+    public void RemoveStatEffect(string tag)
+    {
+        StatEffects.RemoveAll(x => x.Tag == tag);
+    }
+
+    public List<StatEffect> GetStatEffects(StatType type)
+    {
+        return StatEffects.Where(x => x.Type == type).ToList();
+    }
 
     public void UpdateLava() => lavaStartTime = lavaTileCount > 0 && lavaStartTime < 0 ? Time.time : float.MinValue;
     public void ResetLava() => lavaStartTime = float.MinValue;
