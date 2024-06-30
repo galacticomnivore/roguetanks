@@ -46,7 +46,7 @@ public class TankBuilder
         tankMovementController.SpriteController.FaceUp();
         weaponController.SetWeaponType(new SingleBulletFiringKayboardWeapon(gameEngine, spriteController, tank, 30.0f));
         weaponController.movementController = new KeyboardInputActions(tankMovementController.transform);
-        tankStats.initialize(5, 3);
+        tankStats.Initialize(5, 3);
     }
 
     private void CreateEnemyTankBasics()
@@ -61,7 +61,7 @@ public class TankBuilder
     {
         spriteRender.CreateEnemyTank1();
         tankMovementController.Speed = 5.0f;
-        tankStats.initialize(6, 1);
+        tankStats.Initialize(6, 1);
         spriteController.FaceDown();
     }
 
@@ -69,7 +69,7 @@ public class TankBuilder
     {
         spriteRender.CreateEnemyTank2();
         tankMovementController.Speed = 13.0f;
-        tankStats.initialize(7, 1);
+        tankStats.Initialize(7, 1);
         spriteController.FaceDown();
     }
 
@@ -78,7 +78,7 @@ public class TankBuilder
         spriteRender.CreateEnemyTank3();
         tankMovementController.Speed = 10.0f;
         weaponController.UpgradeWeapon();
-        tankStats.initialize(8, 1);
+        tankStats.Initialize(8, 1);
         spriteController.FaceDown();
     }
 
@@ -86,7 +86,7 @@ public class TankBuilder
     {
         spriteRender.CreateEnemyTank4();
         tankMovementController.Speed = 10.0f;
-        tankStats.initialize(9, 4);
+        tankStats.Initialize(9, 4);
         spriteController.FaceDown();
     }
 }

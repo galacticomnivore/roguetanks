@@ -4,20 +4,49 @@ using UnityEngine;
 
 public class TankStats : MonoBehaviour
 {
+    public Tank Tank { get; private set; }
     private Dictionary<int, int> tankPoints = new Dictionary<int, int>();
     public Dictionary<int, int> TankPoints { get => tankPoints; }
     public int TankType { get; private set; }
     public int Points { get; private set; }
     public int Lives { get; private set; } = 1;
 
-    public void initialize(int tankType, int lives)
+    public float LavaTimer = 2f;
+
+    private int lavaTileCount = 0;
+    private float lavaStartTime = float.MinValue;
+
+    public int LavaTileCount
+    {
+        get => lavaTileCount;
+        set
+        {
+            lavaTileCount = value;
+            UpdateLava();
+        }
+    }
+
+    public void Initialize(int tankType, int lives)
     {
         this.TankType = tankType;
         this.Lives = lives;
         this.Tank = GetComponentInParent<Tank>();
     }
 
-    public Tank Tank { get; private set; }
+    void Update()
+    {
+        if(lavaStartTime >= 0 && Time.time - lavaStartTime > LavaTimer)
+        {
+            Debug.Log($"[Lava] Destroyed tank by lava!");
+            HitTank();
+            ResetLava();
+        }
+    }
+
+    public void HitTank()
+    {
+        Tank.BulletHit(null);
+    }
 
     public void AddLive(int numberOfLives) => Lives += numberOfLives;
 
@@ -55,4 +84,10 @@ public class TankStats : MonoBehaviour
 
     public void AddPoint(int destroyedTankType)=>
         tankPoints.AddValue(destroyedTankType, 1);
+
+    public void UpdateLava() => lavaStartTime = lavaTileCount > 0 && lavaStartTime < 0 ? Time.time : float.MinValue;
+    public void ResetLava() => lavaStartTime = float.MinValue;
+
+    public void IncrementLavaCounter() => LavaTileCount++;
+    public void DecrementLavaCounter() => LavaTileCount--;
 }

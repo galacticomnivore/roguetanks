@@ -32,6 +32,7 @@ public class GameFactory : MonoBehaviour
     public Sprite StarUpgradeSprite;
     public Sprite TimeStopUpgradeSprite;
     public Sprite IceSprite;
+    public Sprite LavaSprite;
 
     public void CreateTank(Vector3 startingPosition, Action<Tank> onTankCreated)
     {
@@ -92,6 +93,15 @@ public class GameFactory : MonoBehaviour
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
         singleTileScript.Initialize(IceSprite, "IceTile");
+        gameEngine.GameTiles.Add(singleTileScript);
+        return singleTileScript;
+    }
+    public SingleTile CreateLava(Vector3 position, int row, int column)
+    {
+        var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
+        singleTile.name = singleTile.name + $"_{row}_{column}";
+        var singleTileScript = singleTile.GetComponent<SingleTile>();
+        singleTileScript.Initialize(LavaSprite, "LavaTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }

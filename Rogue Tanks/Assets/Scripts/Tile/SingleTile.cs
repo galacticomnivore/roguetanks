@@ -10,9 +10,27 @@ public class SingleTile : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(collisionLayer);
     }
     
-    private void OnTriggerEnter2D(Collider2D collision) =>
-        collision.gameObject.GetComponentInParent<TankMovementController>().SlideIn();
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(gameObject.layer == LayerMask.NameToLayer("IceTile"))
+        {
+            collision.gameObject.GetComponentInParent<TankMovementController>().SlideIn();
+        }
+        else if(gameObject.layer == LayerMask.NameToLayer("LavaTile"))
+        {
+            collision.gameObject.GetComponentInChildren<TankStats>().IncrementLavaCounter();
+        }
+    }
 
-    private void OnTriggerExit2D(Collider2D collision) =>
-        collision.gameObject.OnGetComponentInParent<TankMovementController>(movement => movement.SlideOut());
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(gameObject.layer == LayerMask.NameToLayer("IceTile"))
+        {
+            collision.gameObject.OnGetComponentInParent<TankMovementController>(movement => movement.SlideOut());
+        }
+        else if(gameObject.layer == LayerMask.NameToLayer("LavaTile"))
+        {
+            collision.gameObject.GetComponentInChildren<TankStats>().DecrementLavaCounter();
+        }
+    }
 }

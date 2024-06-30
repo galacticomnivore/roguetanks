@@ -12,20 +12,22 @@ public class GameObjectBuilder
     public GameObjectBuilder(GameEngine gameEngine)
     {
         this.gameEngine = gameEngine;
-        mapper = new Dictionary<int, Action<Vector3>>();
-
-        mapper.Add(0, pos => { });
-        mapper.Add(1, pos => gameEngine.GameFactory.CreateBrick(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)));
-        mapper.Add(2, pos => gameEngine.GameFactory.CreateForest(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)));
-        mapper.Add(3, pos => gameEngine.GameFactory.CreateWater(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)));
-        mapper.Add(4, pos => gameEngine.GameFactory.CreateStone(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)));
-        mapper.Add(5, pos => RespawnOrCreatePlayerTank(pos));
-        mapper.Add(6, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank1("2", gameEngine)));
-        mapper.Add(7, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank2("2", gameEngine)));
-        mapper.Add(8, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank3("2", gameEngine)));
-        mapper.Add(9, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank4("2", gameEngine)));
-        mapper.Add(10, pos => gameEngine.GameFactory.CreateTankBase(pos, _ => { }));
-        mapper.Add(11, pos=> gameEngine.GameFactory.CreateIce(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)));
+        mapper = new Dictionary<int, Action<Vector3>>
+        {
+            { 0, pos => { } },
+            { 1, pos => gameEngine.GameFactory.CreateBrick(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
+            { 2, pos => gameEngine.GameFactory.CreateForest(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
+            { 3, pos => gameEngine.GameFactory.CreateWater(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
+            { 4, pos => gameEngine.GameFactory.CreateStone(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
+            { 5, pos => RespawnOrCreatePlayerTank(pos) },
+            { 6, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank1("2", gameEngine)) },
+            { 7, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank2("2", gameEngine)) },
+            { 8, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank3("2", gameEngine)) },
+            { 9, pos => gameEngine.GameFactory.CreateTank(pos, tank => tank.CreateEnemyTank4("2", gameEngine)) },
+            { 10, pos => gameEngine.GameFactory.CreateTankBase(pos, _ => { }) },
+            { 11, pos => gameEngine.GameFactory.CreateIce(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) },
+            { 12, pos => gameEngine.GameFactory.CreateLava(pos, level.LevelDimensions.ToY(pos), level.LevelDimensions.ToX(pos)) }
+        };
     }
 
     private void RespawnOrCreatePlayerTank(Vector3 position)

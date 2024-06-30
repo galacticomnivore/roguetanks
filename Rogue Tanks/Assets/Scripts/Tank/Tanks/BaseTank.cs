@@ -14,6 +14,7 @@ public abstract class BaseTank
     protected TankStats tankStats;
 
     private bool hasArmor = false;
+
     public BaseTank(GameObject tank, GameEngine gameEngine)
     {
         this.tankGameObject = tank;

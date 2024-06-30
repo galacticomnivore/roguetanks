@@ -9,6 +9,10 @@ public class BulletWithTileCollisionHandler : ICollisionHandler
     public void Execute(Collider2D collision)
     {
         bulletController.Deactivate();
-        collision.gameObject.GetComponent<UnitTile>().Hit(bulletController);
+        var unitTile = collision.gameObject.GetComponent<UnitTile>();
+        if(unitTile != null)
+        {
+            unitTile.Hit(bulletController);
+        }
     }
 }
