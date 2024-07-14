@@ -10,7 +10,8 @@ public class LevelController
     {
         this.gameEngine = gameEngine;
         gameObjectBuilder = new GameObjectBuilder(gameEngine);
-        currentLevel = new FileLevel(0);
+        LevelSelector levelSelector = LevelSelector.Instance;
+        currentLevel = new FileLevel(levelSelector != null && levelSelector.UseSelector ? levelSelector.Level : 0);
     }
     public void LoadLevel()
     {
