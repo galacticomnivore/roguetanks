@@ -574,7 +574,6 @@ GameObject:
   - component: {fileID: 641389334}
   - component: {fileID: 641389335}
   - component: {fileID: 641389336}
-  - component: {fileID: 641389337}
   m_Layer: 0
   m_Name: GameEngine
   m_TagString: Untagged
@@ -813,25 +812,6 @@ MonoBehaviour:
   anchorPointCenter: {fileID: 1160545659}
   stageNumberText: {fileID: 1364756569}
   gameOverText: {fileID: 335832882}
---- !u!114 &641389337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641389328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5dff1a97f771d448c9678bb409b626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatEffects:
-  - Tile: Mud
-    Effects:
-    - Tag: Mud
-      Type: 0
-      ModifierType: 1
-      Value: -0.5
 --- !u!1 &759077400
 GameObject:
   m_ObjectHideFlags: 0

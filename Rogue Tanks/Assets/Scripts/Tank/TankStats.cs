@@ -12,38 +12,29 @@ public class TankStats : MonoBehaviour
     public int Points { get; private set; }
     public int Lives { get; private set; } = 1;
 
-    public float LavaTimer = 2f;
-
-    private int lavaTileCount = 0;
-    private int previousLavaTileCount = 0;
-    private float lavaStartTime = float.MinValue;
-
-    public int LavaTileCount
-    {
-        get => lavaTileCount;
-        set
-        {
-            previousLavaTileCount = lavaTileCount;
-            lavaTileCount = value;
-            UpdateLava();
-        }
-    }
-
+    public List<SerializableEffectTile> PossibleEffectTiles = new List<SerializableEffectTile>();
     public List<StatEffect> StatEffects = new List<StatEffect>();
+
+    private Dictionary<string, EffectTile> effectTiles = new Dictionary<string, EffectTile>();
 
     public void Initialize(int tankType, int lives)
     {
-        this.TankType = tankType;
-        this.Lives = lives;
-        this.Tank = GetComponentInParent<Tank>();
+        TankType = tankType;
+        Lives = lives;
+        Tank = GetComponentInParent<Tank>();
+        effectTiles = new Dictionary<string, EffectTile>();
+        PossibleEffectTiles.ForEach(x => effectTiles.Add(x.Tile, new EffectTile(x.Effects, x.Duration)));
     }
 
     void Update()
     {
-        if(lavaStartTime >= 0 && Time.time - lavaStartTime > LavaTimer)
+        foreach(var tile in effectTiles.Keys)
         {
-            HitTank();
-            ResetLava();
+            if(effectTiles[tile].IsCompleted(Time.time))
+            {
+                Debug.Log($"[Effect Tile] Tile {tile} completed!");
+                effectTiles[tile].Complete();
+            }
         }
     }
 
@@ -86,12 +77,11 @@ public class TankStats : MonoBehaviour
         return this;
     }
 
-    public void AddPoint(int destroyedTankType)=>
-        tankPoints.AddValue(destroyedTankType, 1);
+    public void AddPoint(int destroyedTankType) => tankPoints.AddValue(destroyedTankType, 1);
 
-    public void AddStatEffect(StatEffect statEffect, bool stackable = false)
+    public void AddStatEffect(StatEffect statEffect)
     {
-        if(stackable || !StatEffects.Exists(x => x.Tag == statEffect.Tag))
+        if(!StatEffects.Exists(x => x.Tag == statEffect.Tag))
         {
             StatEffects.Add(statEffect);
         }
@@ -107,19 +97,36 @@ public class TankStats : MonoBehaviour
         return StatEffects.Where(x => x.Type == type).ToList();
     }
 
-    public void UpdateLava()
+    private void UpdateTileEffects()
     {
-        if(previousLavaTileCount == 0 && lavaTileCount > 0)
+        foreach(var tile in effectTiles.Values)
         {
-            lavaStartTime = Time.time;
-        }
-        else if(previousLavaTileCount > 0 && lavaTileCount == 0)
-        {
-            lavaStartTime = float.MinValue;
+            if(tile.CanBeAdded())
+            {
+                tile.Effects.ForEach(x => AddStatEffect(x));
+            }
+            else if(tile.CanBeRemoved())
+            {
+                tile.Effects.ForEach(x => RemoveStatEffect(x.Tag));
+            }
         }
     }
-    public void ResetLava() => lavaStartTime = float.MinValue;
 
-    public void IncrementLavaCounter() => LavaTileCount++;
-    public void DecrementLavaCounter() => LavaTileCount--;
+    public void AddTileCollision(string tile)
+    {
+        if(effectTiles.ContainsKey(tile))
+        {
+            effectTiles[tile].Increment();
+        }
+        UpdateTileEffects();
+    }
+
+    public void RemoveTileCollision(string tile)
+    {
+        if(effectTiles.ContainsKey(tile))
+        {
+            effectTiles[tile].Decrement();
+        }
+        UpdateTileEffects();
+    }
 }

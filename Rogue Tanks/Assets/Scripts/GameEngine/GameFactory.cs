@@ -93,7 +93,7 @@ public class GameFactory : MonoBehaviour
         var singleTile = Instantiate(SingleTilePrefab, position, Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.Initialize(IceSprites.Get(0, 1, 4, 5), "IceTile");
+        singleTileScript.Initialize("Ice", IceSprites.Get(0, 1, 4, 5), "IceTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }
@@ -101,8 +101,10 @@ public class GameFactory : MonoBehaviour
     {
         var singleTile = Instantiate(SingleTilePrefab, position, Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
+        var collider = singleTile.GetComponent<BoxCollider2D>();
+        collider.size = collider.size * 0.8f;
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.Initialize(LavaSprites.Get(0, 1, 4, 5), "LavaTile");
+        singleTileScript.Initialize("Lava", LavaSprites.Get(0, 1, 4, 5), "LavaTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }
@@ -110,9 +112,10 @@ public class GameFactory : MonoBehaviour
     {
         var singleTile = Instantiate(SingleTilePrefab, position, Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
+        var collider = singleTile.GetComponent<BoxCollider2D>();
+        collider.size = collider.size * 0.8f;
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Mud");
-        singleTileScript.Initialize(MudSprites.Get(0, 1, 4, 5), "MudTile");
+        singleTileScript.Initialize("Mud", MudSprites.Get(0, 1, 4, 5), "MudTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }
