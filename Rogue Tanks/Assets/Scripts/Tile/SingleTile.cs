@@ -5,11 +5,16 @@ public class SingleTile : MonoBehaviour
 {
     public List<StatEffect> StatEffects;
 
-    public void Initialize(Sprite sprite, string collisionLayer)
+    private UnitTile[] unitTiles;
+
+    private void Awake()
     {
-        var spriteRenderer = GetComponent<SpriteRenderer>();
-        if (spriteRenderer == null) return;
-        spriteRenderer.sprite = sprite;
+        unitTiles = GetComponentsInChildren<UnitTile>();
+    }
+
+    public void Initialize(Sprite[] sprites, string collisionLayer)
+    {
+        unitTiles.For((index, unitTile) => unitTile.Initialize(sprites[index], collisionLayer));
         gameObject.layer = LayerMask.NameToLayer(collisionLayer);
     }
     

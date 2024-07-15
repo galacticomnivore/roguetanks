@@ -673,15 +673,63 @@ MonoBehaviour:
   - {fileID: -2653576796623951216, guid: e363140bf8f7461418f7298e65b50658, type: 3}
   - {fileID: 293055370337447235, guid: e363140bf8f7461418f7298e65b50658, type: 3}
   - {fileID: -6029029399364626799, guid: e363140bf8f7461418f7298e65b50658, type: 3}
+  IceSprites:
+  - {fileID: -18382224, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: -1805037790, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 179545594, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: -347518110, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 968507156, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: -756938381, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 1563706697, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 1854570526, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: -290405629, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 1802676850, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 533442153, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 1847342852, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 777613843, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: -1187833492, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 1540250232, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  - {fileID: 243766212, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
+  LavaSprites:
+  - {fileID: 2015889312, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: 1977646406, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -362248275, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -970491339, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -514977901, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -328395703, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -625350944, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: 1710259246, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -455773870, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -1204136596, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: 1122021770, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: 2071170166, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -2016813455, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -571760760, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: -1976439288, guid: d022252069a520d41929400f77a89867, type: 3}
+  - {fileID: 1802435063, guid: d022252069a520d41929400f77a89867, type: 3}
+  MudSprites:
+  - {fileID: -1921517863, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 586066707, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -334591033, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -1671954544, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -263621537, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 292920326, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -567794828, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -83153205, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 1378539161, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 2088198978, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -1714095887, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 85516492, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 1295640339, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 761294684, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: 687871462, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
+  - {fileID: -1431941721, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
   ArmorUpgradeSprite: {fileID: 21300000, guid: 15d861eae6c3c0246a109612093af80c, type: 3}
   BombUpgradeSprite: {fileID: 21300000, guid: 499d2f456097ced498632270d61fc750, type: 3}
   PowerUpSprite: {fileID: 21300000, guid: d0b42d66ff5b919469033eecded7bc8b, type: 3}
   ShovelUpgradeSprite: {fileID: 21300000, guid: fdb75d81a3930e54294e1a2f100e84d0, type: 3}
   StarUpgradeSprite: {fileID: 21300000, guid: 8a0cb1185f3e2fc4cb360a1013a59a00, type: 3}
   TimeStopUpgradeSprite: {fileID: 21300000, guid: a4356de4b9678de46b95168a756d2993, type: 3}
-  IceSprite: {fileID: 21300000, guid: 185a6bb6c9e230f4cbb50d86457d9b2f, type: 3}
-  LavaSprite: {fileID: 21300000, guid: d022252069a520d41929400f77a89867, type: 3}
-  MudSprite: {fileID: 21300000, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
 --- !u!4 &641389330
 Transform:
   m_ObjectHideFlags: 0
