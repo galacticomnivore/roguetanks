@@ -711,6 +711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Level: 0
+  UseSelector: 0
 --- !u!4 &1307356743
 Transform:
   m_ObjectHideFlags: 0

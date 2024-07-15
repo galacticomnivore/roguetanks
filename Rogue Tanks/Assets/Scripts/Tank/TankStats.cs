@@ -15,6 +15,7 @@ public class TankStats : MonoBehaviour
     public float LavaTimer = 2f;
 
     private int lavaTileCount = 0;
+    private int previousLavaTileCount = 0;
     private float lavaStartTime = float.MinValue;
 
     public int LavaTileCount
@@ -22,6 +23,7 @@ public class TankStats : MonoBehaviour
         get => lavaTileCount;
         set
         {
+            previousLavaTileCount = lavaTileCount;
             lavaTileCount = value;
             UpdateLava();
         }
@@ -105,7 +107,17 @@ public class TankStats : MonoBehaviour
         return StatEffects.Where(x => x.Type == type).ToList();
     }
 
-    public void UpdateLava() => lavaStartTime = lavaTileCount > 0 && lavaStartTime < 0 ? Time.time : float.MinValue;
+    public void UpdateLava()
+    {
+        if(previousLavaTileCount == 0 && lavaTileCount > 0)
+        {
+            lavaStartTime = Time.time;
+        }
+        else if(previousLavaTileCount > 0 && lavaTileCount == 0)
+        {
+            lavaStartTime = float.MinValue;
+        }
+    }
     public void ResetLava() => lavaStartTime = float.MinValue;
 
     public void IncrementLavaCounter() => LavaTileCount++;
