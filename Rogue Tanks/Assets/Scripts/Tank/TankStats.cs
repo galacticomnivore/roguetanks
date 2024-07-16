@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class TankStats : MonoBehaviour
@@ -15,6 +16,7 @@ public class TankStats : MonoBehaviour
     public List<SerializableEffectTile> PossibleEffectTiles = new List<SerializableEffectTile>();
     public List<StatEffect> StatEffects = new List<StatEffect>();
 
+    [ShowInInspector]
     private Dictionary<string, EffectTile> effectTiles = new Dictionary<string, EffectTile>();
 
     public void Initialize(int tankType, int lives)
@@ -23,7 +25,11 @@ public class TankStats : MonoBehaviour
         Lives = lives;
         Tank = GetComponentInParent<Tank>();
         effectTiles = new Dictionary<string, EffectTile>();
-        PossibleEffectTiles.ForEach(x => effectTiles.Add(x.Tile, new EffectTile(x.Effects, x.Duration)));
+        PossibleEffectTiles.ForEach(x => {
+            EffectTileAction action = x.EffectTileAction != null ? x.EffectTileAction.Clone() : null;
+            if(action != null) action.Init(this);
+            effectTiles.Add(x.Tile, new EffectTile(x.Effects, x.Duration, action));
+        });
     }
 
     void Update()
@@ -32,7 +38,6 @@ public class TankStats : MonoBehaviour
         {
             if(effectTiles[tile].IsCompleted(Time.time))
             {
-                Debug.Log($"[Effect Tile] Tile {tile} completed!");
                 effectTiles[tile].Complete();
             }
         }
@@ -51,10 +56,18 @@ public class TankStats : MonoBehaviour
         onLiveAdd(Lives);
     }
 
+    public TankStats DecreaseLife()
+    {
+        Lives -= 1;
+        ResetEffects();
+        return this;
+    }
+
     public TankStats DecreaseLife(Action onDecreaseLife)
     {
         Lives -= 1;
         onDecreaseLife();
+        ResetEffects();
         return this;
     }
 
@@ -62,6 +75,7 @@ public class TankStats : MonoBehaviour
     {
         Lives -= 1;
         onLiveDecreased(Lives);
+        ResetEffects();
         return this;
     }
 
@@ -109,6 +123,14 @@ public class TankStats : MonoBehaviour
             {
                 tile.Effects.ForEach(x => RemoveStatEffect(x.Tag));
             }
+        }
+    }
+
+    private void ResetEffects()
+    {
+        foreach(var tile in effectTiles.Values)
+        {
+            tile.Reset();
         }
     }
 
