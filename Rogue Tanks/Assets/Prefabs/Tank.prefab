@@ -172,6 +172,7 @@ MonoBehaviour:
     Effects: []
     IsDurable: 1
     Duration: 2
+    EffectTileAction: {fileID: 11400000, guid: d9aaf0fd9a2fa0e4394e8232b78a4840, type: 2}
   - Tile: Mud
     Effects:
     - Tag: Mud
@@ -180,6 +181,7 @@ MonoBehaviour:
       Value: -0.3
     IsDurable: 0
     Duration: 0
+    EffectTileAction: {fileID: 0}
   StatEffects: []
 --- !u!1 &5475365093212797085
 GameObject:
