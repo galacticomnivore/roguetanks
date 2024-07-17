@@ -23,6 +23,12 @@ public class SingleTile : MonoBehaviour
         if(Tile.Length <= 0)
             return;
 
+        if(Tile == "Ice" && gameObject.layer == LayerMask.NameToLayer("IceTile"))
+        {
+            collision.gameObject.GetComponentInParent<TankMovementController>().SlideIn();
+            return;
+        }
+
         var tankStats = collision.gameObject.GetComponentInChildren<TankStats>();
         if(tankStats != null)
         {
@@ -34,6 +40,12 @@ public class SingleTile : MonoBehaviour
     {
         if(Tile.Length <= 0)
             return;
+
+        if(Tile == "Ice" && gameObject.layer == LayerMask.NameToLayer("IceTile"))
+        {
+            collision.gameObject.OnGetComponentInParent<TankMovementController>(movement => movement.SlideOut());
+            return;
+        }
 
         var tankStats = collision.gameObject.GetComponentInChildren<TankStats>();
         if(tankStats != null)

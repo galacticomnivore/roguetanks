@@ -7,13 +7,6 @@ public class LavaTileAction : EffectTileAction
 {
     public override void Execute()
     {
-        if(tankStats.Tank.IsPlayerTank())
-        {
-            tankStats.Tank.BulletHit(null);
-        }
-        else
-        {
-            // TO-DO: Implement logic to destroy enemy tank
-        }
+        tankStats.Tank.BulletHit(null);
     }
 }
