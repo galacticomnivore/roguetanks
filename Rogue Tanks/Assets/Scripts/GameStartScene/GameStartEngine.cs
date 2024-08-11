@@ -9,53 +9,63 @@ public class GameStartEngine : MonoBehaviour
     public Text TwoPlayers;
     public Text LevelSelection;
     public Text Construction;
+    public GameObject StartText;
+    public float Delay = 1f;
     private int selection = 1;
+    private bool canStart = false;
 
     void Start()
     {
-        TankImage.rectTransform.position = new Vector3(TankImage.rectTransform.position.x, OnePlayer.rectTransform.position.y, 0);
-        UpdateLevelText();
+        TankImage.gameObject.SetActive(false);
+        StartText.SetActive(false);
+        canStart = false;
+        Invoke("ActivateText", Delay);
+        // TankImage.rectTransform.position = new Vector3(TankImage.rectTransform.position.x, OnePlayer.rectTransform.position.y, 0);
+        // UpdateLevelText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            selection -= 1;
-            if (selection == 0)
-                selection = 4;
-            PlaceSelection();
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            selection += 1;
-            if (selection == 5)
-                selection = 1;
-            PlaceSelection();
-        }
-        else if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && canStart)
             LoadStage();
 
-        if (selection == 3 && LevelSelector.Instance != null)
-        {
-            bool updated = false;
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                LevelSelector.Instance.DecreaseLevel();
-                updated = true;
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                LevelSelector.Instance.IncreaseLevel();
-                updated = true;
-            }
+        // if (Input.GetKeyDown(KeyCode.UpArrow))
+        // {
+        //     selection -= 1;
+        //     if (selection == 0)
+        //         selection = 4;
+        //     PlaceSelection();
+        // }
+        // else if (Input.GetKeyDown(KeyCode.DownArrow))
+        // {
+        //     selection += 1;
+        //     if (selection == 5)
+        //         selection = 1;
+        //     PlaceSelection();
+        // }
+        // else if (Input.GetKeyDown(KeyCode.Return))
+        //     LoadStage();
 
-            if(updated)
-            {
-                UpdateLevelText();
-            }
-        }
+        // if (selection == 3 && LevelSelector.Instance != null)
+        // {
+        //     bool updated = false;
+        //     if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //     {
+        //         LevelSelector.Instance.DecreaseLevel();
+        //         updated = true;
+        //     }
+        //     else if (Input.GetKeyDown(KeyCode.RightArrow))
+        //     {
+        //         LevelSelector.Instance.IncreaseLevel();
+        //         updated = true;
+        //     }
+
+        //     if(updated)
+        //     {
+        //         UpdateLevelText();
+        //     }
+        // }
     }
 
     private void LoadStage()
@@ -73,6 +83,12 @@ public class GameStartEngine : MonoBehaviour
             }
             SceneManager.LoadGameScene();
         }
+    }
+
+    private void ActivateText()
+    {
+        StartText.SetActive(true);
+        canStart = true;
     }
 
     private void PlaceSelection()
