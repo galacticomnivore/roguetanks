@@ -1,18 +1,42 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletWithTileCollisionHandler : ICollisionHandler
 {
-    private readonly BulletController bulletController;
+    private BulletController bulletController;
+
+    // ✅ This is the missing constructor
+    public BulletWithTileCollisionHandler(BulletController bulletController)
+    {
+        this.bulletController = bulletController;
+    }
     public string CollisionTag => "Tile";
-    public BulletWithTileCollisionHandler(BulletController bulletController) => this.bulletController = bulletController;
+
 
     public void Execute(Collider2D collision)
     {
-        bulletController.Deactivate();
-        var unitTile = collision.gameObject.GetComponent<UnitTile>();
-        if(unitTile != null)
+        var unitTile = collision.GetComponent<UnitTile>();
+        if (unitTile != null)
         {
             unitTile.Hit(bulletController);
+
+            var singleTile = collision.GetComponent<SingleTile>();
+            if (singleTile != null)
+            {
+                switch (singleTile.ElementType)
+                {
+                    case TileElementType.Lava:
+                        bulletController.SetBulletType(BulletTypes.Fire);
+                        break;
+                    case TileElementType.Ice:
+                        bulletController.SetBulletType(BulletTypes.Ice);
+                        break;
+                    case TileElementType.Mud:
+                        bulletController.SetBulletType(BulletTypes.Mud);
+                        break;
+                }
+            }
         }
+
+        bulletController.Deactivate();
     }
 }

@@ -5,13 +5,23 @@ public class Bullet
     private readonly BulletMovement movement;
     private readonly BulletSprite sprite;
 
+    public BulletTypes BulletType { get; set; }
+    public int Strength { get; private set; }
+
+    public void SetBulletType(BulletTypes type)
+    {
+        BulletType = type;
+    }
     public float Speed { get => movement.Speed; internal set => movement.Speed = value; }
     public Vector3 Direction { get => movement.Direction; }
 
-    public Bullet(BulletMovement movement, BulletSprite sprite)
+    public Bullet(BulletMovement movement, BulletSprite sprite, BulletTypes type, int strength)
     {
         this.movement = movement;
         this.sprite = sprite;
+        this.BulletType = type;
+        this.Strength = strength;
+
     }
 
     public void FaceUp()

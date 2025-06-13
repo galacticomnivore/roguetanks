@@ -43,13 +43,14 @@ public class GameFactory : MonoBehaviour
         gameEngine.ActiveGameObjectsController.AddTank(tankScript);
     }
 
-    public GameObject CreateBullet(Vector3 position,Tank tank, float bulletSpeed, Action<BulletController> onBulletCreated)
+    public GameObject CreateBullet(Vector3 position, Tank tank, BulletData bulletData, Action<BulletController> onBulletCreated)
     {
-        var bullet = Instantiate(BulletPrefab,position, Quaternion.identity);
-        var bulletController = bullet.GetComponent<BulletController>().InitializeBullet(tank, bulletSpeed);
+        var bullet = Instantiate(BulletPrefab, position, Quaternion.identity);
+        var bulletController = bullet.GetComponent<BulletController>().InitializeBullet(tank, bulletData);
         onBulletCreated(bulletController);
         return bullet;
     }
+
 
     public void CreateRaycasts(Vector3 position, Transform parent, Action<RaycastController> onRaycastsCreated)
     {
@@ -94,18 +95,21 @@ public class GameFactory : MonoBehaviour
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
         singleTileScript.Initialize(IceSprite, "IceTile");
+        singleTileScript.ElementType = TileElementType.Ice;
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }
     public SingleTile CreateLava(Vector3 position, int row, int column)
     {
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
-        singleTile.name = singleTile.name + $"_{row}_{column}";
+        singleTile.name += $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
         singleTileScript.Initialize(LavaSprite, "LavaTile");
+        singleTileScript.ElementType = TileElementType.Lava; 
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }
+
     public SingleTile CreateMud(Vector3 position, int row, int column)
     {
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
@@ -113,6 +117,7 @@ public class GameFactory : MonoBehaviour
         var singleTileScript = singleTile.GetComponent<SingleTile>();
         singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Mud");
         singleTileScript.Initialize(MudSprite, "MudTile");
+        singleTileScript.ElementType = TileElementType.Mud;
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }

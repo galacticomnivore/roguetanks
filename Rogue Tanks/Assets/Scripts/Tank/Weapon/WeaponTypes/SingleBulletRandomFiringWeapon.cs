@@ -9,10 +9,13 @@ public class SingleBulletRandomFiringWeapon : MonoBehaviour, IWeaponType
 
     public List<GameObject> Bullets { get; private set; }
     private BulletController bulletController;
-    public SingleBulletRandomFiringWeapon(GameEngine gameEngine, SpriteController spriteController, Tank tank, float bulletSpeed)
+
+    //[SerializeField] private BulletData bulletData;
+
+    public SingleBulletRandomFiringWeapon(GameEngine gameEngine, SpriteController spriteController, Tank tank, BulletData bulletData)
     {
         Bullets = new List<GameObject>();
-        Bullets.Add(gameEngine.GameFactory.CreateBullet(tank.transform.position, tank, bulletSpeed, bc => bulletController = bc));
+        Bullets.Add(gameEngine.GameFactory.CreateBullet(tank.transform.position, tank, bulletData, bc => bulletController = bc));
         this.spriteController = spriteController;
         this.tank = tank;
     }
