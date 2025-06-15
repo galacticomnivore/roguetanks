@@ -194,14 +194,14 @@ public class KeyboardInputActions : IInputActionController
 
         if (!isSliding)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Keypad4))
             {
                 direction = Direction.Left;
             }
 
             if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)) && direction == Direction.Left)
                 onLeft();
-            if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Left)
+            if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.Keypad4)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Left)
             {
                 slidingDirection = Direction.Left;
                 slideSignal--;
@@ -274,14 +274,14 @@ public class KeyboardInputActions : IInputActionController
 
         if (!isSliding)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Keypad6))
             {
                 direction = Direction.Right;
             }
 
             if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6)) && direction == Direction.Right)
                 onRight();
-            if ((Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKey(KeyCode.Keypad6)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Right)
+            if ((Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.Keypad6)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Right)
             {
                 slidingDirection = Direction.Right;
                 slideSignal--;
