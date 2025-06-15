@@ -29,37 +29,37 @@ public class KeyboardInputActions : IInputActionController
     {
         if (!isEnabled) return this;
 
-        if(slidingIsPaused && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)))
+        if(slidingIsPaused && (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8)))
             slidingIsPaused = false;
 
         if (!isSliding)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Keypad8))
             {
                 direction = Direction.Up;
             }
             
-            if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))  && direction == Direction.Up)
+            if ((Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))  && direction == Direction.Up)
                 onUp();
-            if ((Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Up)
+            if ((Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Keypad8)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Up)
             {
                 slidingDirection = Direction.Up;
                 slideSignal--;
                 isSliding = true;
             }
-            if (!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && direction == Direction.Up)
+            if (!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8)) && direction == Direction.Up)
             {
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
                 {
                     direction = Direction.Right;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
                 {
                     direction = Direction.Left;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5))
                 {
                     direction = Direction.Down;
                     hasCalculatedDistance = false;
@@ -74,19 +74,19 @@ public class KeyboardInputActions : IInputActionController
                 hasCalculatedDistance = true;
             }
 
-            if (!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && slidingDirection == Direction.Up)
+            if (!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8)) && slidingDirection == Direction.Up)
             {
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
                 {
                     slidingDirection = Direction.Right;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
                 {
                     slidingDirection = Direction.Left;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5))
                 {
                     slidingDirection = Direction.Down;
                     hasCalculatedDistance = false;
@@ -109,37 +109,37 @@ public class KeyboardInputActions : IInputActionController
     {
         if (!isEnabled) return this;
 
-        if(slidingIsPaused && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)))
+        if(slidingIsPaused && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5)))
                 slidingIsPaused = false;
 
         if (!isSliding)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.Keypad5))
             {
                 direction = Direction.Down;
             }
 
-            if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && direction == Direction.Down)
+            if ((Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5)) && direction == Direction.Down)
                 onDown();
-            if ((Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Down)
+            if ((Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.Keypad5)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Down)
             {
                 slidingDirection = Direction.Down;
                 slideSignal--;
                 isSliding = true;
             }
-            if (!(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && direction == Direction.Down)
+            if (!(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5)) && direction == Direction.Down)
             {
-                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))
                 {
                     direction = Direction.Up;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
                 {
                     direction = Direction.Left;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
                 {
                     direction = Direction.Right;
                     hasCalculatedDistance = false;
@@ -154,19 +154,19 @@ public class KeyboardInputActions : IInputActionController
                 hasCalculatedDistance = true;
             }
 
-            if (!(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && slidingDirection == Direction.Down)
+            if (!(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5)) && slidingDirection == Direction.Down)
             {
-                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))
                 {
                     slidingDirection = Direction.Up;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
                 {
                     slidingDirection = Direction.Left;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
                 {
                     slidingDirection = Direction.Right;
                     hasCalculatedDistance = false;
@@ -189,37 +189,37 @@ public class KeyboardInputActions : IInputActionController
     {
         if (!isEnabled) return this;
 
-        if (slidingIsPaused && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)))
+        if (slidingIsPaused && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)))
                 slidingIsPaused = false;
 
         if (!isSliding)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
             {
                 direction = Direction.Left;
             }
 
-            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && direction == Direction.Left)
+            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)) && direction == Direction.Left)
                 onLeft();
-            if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Left)
+            if ((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Left)
             {
                 slidingDirection = Direction.Left;
                 slideSignal--;
                 isSliding = true;
             }
-            if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && direction == Direction.Left)
+            if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)) && direction == Direction.Left)
             {
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
                 {
                     direction = Direction.Right;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))
                 {
                     direction = Direction.Up;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5))
                 {
                     direction = Direction.Down;
                     hasCalculatedDistance = false;
@@ -234,19 +234,19 @@ public class KeyboardInputActions : IInputActionController
                 hasCalculatedDistance = true;
             }
 
-            if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && slidingDirection == Direction.Left)
+            if (!(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4)) && slidingDirection == Direction.Left)
             {
-                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
                 {
                     slidingDirection = Direction.Right;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))
                 {
                     slidingDirection = Direction.Up;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5))
                 {
                     slidingDirection = Direction.Down;
                     hasCalculatedDistance = false;
@@ -269,37 +269,37 @@ public class KeyboardInputActions : IInputActionController
     {
         if (!isEnabled) return this;
 
-        if (slidingIsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)))
+        if (slidingIsPaused && (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6)))
                 slidingIsPaused = false;
 
         if (!isSliding)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.Keypad6))
             {
                 direction = Direction.Right;
             }
 
-            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && direction == Direction.Right)
+            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6)) && direction == Direction.Right)
                 onRight();
-            if ((Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Right)
+            if ((Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.D) || Input.GetKey(KeyCode.Keypad6)) && slideSignal > 0 && totalSlidesCount != 0 && direction == Direction.Right)
             {
                 slidingDirection = Direction.Right;
                 slideSignal--;
                 isSliding = true;
             }
-            if (!(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && direction == Direction.Right)
+            if (!(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad6)) && direction == Direction.Right)
             {
-                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
                 {
                     direction = Direction.Left;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))
                 {
                     direction = Direction.Up;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5))
                 {
                     direction = Direction.Down;
                     hasCalculatedDistance = false;
@@ -314,19 +314,19 @@ public class KeyboardInputActions : IInputActionController
                 hasCalculatedDistance = true;
             }
 
-            if (!(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && slidingDirection == Direction.Right)
+            if (!(Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.Keypad4)) && slidingDirection == Direction.Right)
             {
-                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Keypad4))
                 {
                     slidingDirection = Direction.Left;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Keypad8))
                 {
                     slidingDirection = Direction.Up;
                     hasCalculatedDistance = false;
                 }
-                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Keypad5))
                 {
                     slidingDirection = Direction.Down;
                     hasCalculatedDistance = false;
@@ -347,7 +347,7 @@ public class KeyboardInputActions : IInputActionController
 
     public IInputActionController Fire(Action onFire)
     {
-        if (isEnabled && Input.GetKeyDown(KeyCode.Space))
+        if (isEnabled && Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad0))
             onFire();
         return this;
     }
