@@ -1,17 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-public enum TileElementType
-{
-    Lava,
-    Ice,
-    Mud
-}
+
 public class SingleTile : MonoBehaviour
 {
     public List<StatEffect> StatEffects;
-    public TileElementType ElementType = TileElementType.Lava;
-    public TileElementType ElementType2 = TileElementType.Ice;
-    public TileElementType ElementType3 = TileElementType.Mud;
 
     public void Initialize(Sprite sprite, string collisionLayer)
     {

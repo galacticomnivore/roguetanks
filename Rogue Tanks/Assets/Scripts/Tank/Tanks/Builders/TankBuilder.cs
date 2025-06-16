@@ -14,8 +14,6 @@ public class TankBuilder
 
     private readonly Dictionary<int, Action> builder;
 
-    BulletData data { get; set; }
-
     public TankBuilder(GameEngine gameEngine, Tank tank, TankMovementController tankMovementController, WeaponController weaponController, TankStats tankStats, SpriteRender spriteRender, SpriteController spriteController)
     {
         this.gameEngine = gameEngine;
@@ -55,7 +53,7 @@ public class TankBuilder
     {
         tank.gameObject.layer = LayerMask.NameToLayer("Enemy");
         tankMovementController.Movement = new RandomInputActions();
-        weaponController.SetWeaponType(new SingleBulletRandomFiringWeapon(gameEngine, spriteController, tank, data));
+        weaponController.SetWeaponType(new SingleBulletRandomFiringWeapon(gameEngine, spriteController, tank, 20.0f));
         weaponController.movementController = new RandomInputActions();
     }
 

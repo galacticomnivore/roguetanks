@@ -3,8 +3,6 @@ using UnityEngine;
 public class BulletSprite : MonoBehaviour
 {
     private BulletCollisionEngine bulletCollisionEngine;
- 
-
     public BulletSprite Initialize(BulletController bulletController)
     {
         bulletCollisionEngine = BulletCollisionEngine.Create(new BulletWithGroundCollisionHandler(bulletController), 

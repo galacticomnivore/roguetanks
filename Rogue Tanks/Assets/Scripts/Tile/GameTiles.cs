@@ -7,7 +7,6 @@ public class GameTiles : MonoBehaviour
     private List<GroupTile> GroupTiles = new List<GroupTile>();
     private List<SingleTile> SingleTiles = new List<SingleTile>();
 
-
     public void Add(GroupTile groupTile)
     {
         groupTile.OnHit += Hit;
