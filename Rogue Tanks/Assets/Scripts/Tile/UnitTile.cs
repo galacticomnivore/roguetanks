@@ -10,6 +10,8 @@ public class UnitTile : MonoBehaviour
     {
         Row = name.Split('_')[1].ToInt();
         Column = name.Split('_')[2].ToInt();
+
+        Debug.Log($"[UNIT TILE] {name} is a UnitTile");
     }
 
     public void Initialize(Sprite sprite, string collisionLayer)

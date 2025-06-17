@@ -28,6 +28,6 @@ public class TankBase : MonoBehaviour
     }
 
     public void Blink(int numberOfTimes) => gameEngine.GameUtilities.RepeatActions(numberOfTimes, 0.5f, new Action[] { ProtectBase, UnprotectBase });
-    public void ProtectBase() => tiles.ForEach(groupTile => groupTile.Initialize(gameEngine.GameFactory.StoneWallSprites.Get(0, 1, 4, 5), "Tile", 2));
-    public void UnprotectBase() => tiles.ForEach(groupTile => groupTile.Initialize(gameEngine.GameFactory.BrickSprites.Get(0, 1, 4, 5), "Tile", 1));
+    public void ProtectBase() => tiles.ForEach(groupTile => groupTile.Initialize(gameEngine.GameFactory.StoneWallSprites.Get(0, 1, 4, 5), new string[] { "Tile", "Tile", "Tile", "Tile" }, 2));
+    public void UnprotectBase() => tiles.ForEach(groupTile => groupTile.Initialize(gameEngine.GameFactory.BrickSprites.Get(0, 1, 4, 5), new string[] { "Tile", "Tile", "Tile", "Tile" }, 1));
 }

@@ -35,6 +35,13 @@ public class GameFactory : MonoBehaviour
     public Sprite LavaSprite;
     public Sprite MudSprite;
 
+    public Sprite StandardBulletSprite;
+    public Sprite FireBulletSprite;
+    public Sprite WaterBulletSprite;
+    public Sprite MudBulletSprite;
+    public Sprite IceBulletSprite;
+
+
     public void CreateTank(Vector3 startingPosition, Action<Tank> onTankCreated)
     {
         var tank = Instantiate(TankPrefab, startingPosition.AdjustForTank(), Quaternion.identity);
@@ -46,7 +53,7 @@ public class GameFactory : MonoBehaviour
     public GameObject CreateBullet(Vector3 position,Tank tank, float bulletSpeed, Action<BulletController> onBulletCreated)
     {
         var bullet = Instantiate(BulletPrefab,position, Quaternion.identity);
-        var bulletController = bullet.GetComponent<BulletController>().InitializeBullet(tank, bulletSpeed);
+        var bulletController = bullet.GetComponent<BulletController>().InitializeBullet(tank, bulletSpeed, this);
         onBulletCreated(bulletController);
         return bullet;
     }
@@ -84,24 +91,28 @@ public class GameFactory : MonoBehaviour
         return groupTileScript;
     }
 
-    public GroupTile CreateBrick(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(BrickSprites.Get(0,1,4,5), "Tile",1));
-    public GroupTile CreateForest(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(ForestSprites.Get(0, 1, 4, 5), "ForestTile",0));
-    public GroupTile CreateWater(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(WaterSprites.Get(0, 1, 4, 5), "WaterTile",0));
-    public GroupTile CreateStone(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(StoneWallSprites.Get(0, 1, 4, 5), "Tile",2));
+    public GroupTile CreateBrick(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(BrickSprites.Get(0,1,4,5), new string[] { "Tile", "Tile", "Tile", "Tile" }, 1));
+    public GroupTile CreateForest(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(ForestSprites.Get(0, 1, 4, 5), new string[] { "ForestTile", "ForestTile", "ForestTile", "ForestTile" },0));
+    public GroupTile CreateWater(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(WaterSprites.Get(0, 1, 4, 5), new string[] { "WaterTile", "WaterTile", "WaterTile", "WaterTile" },0));
+    public GroupTile CreateStone(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(StoneWallSprites.Get(0, 1, 4, 5), new string[] { "Tile", "Tile", "Tile", "Tile" },2));
     public SingleTile CreateIce(Vector3 position, int row, int column)
     {
+        Debug.Log($"[FACTORY] Creating ICE at {row},{column}"); // novo dodadeno 
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
+        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Ice"); // novo dodadeno
         singleTileScript.Initialize(IceSprite, "IceTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
     }
-    public SingleTile CreateLava(Vector3 position, int row, int column)
+    public SingleTile CreateLava(Vector3 position, int row, int column) // It's instantiated as Unit Tile instead of Single tile.
     {
+        Debug.Log($"[FACTORY] Creating LAVA at {row},{column}"); // novo dodadeno 
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
+        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Lava"); // novo dodadeno 
         singleTileScript.Initialize(LavaSprite, "LavaTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
@@ -111,7 +122,7 @@ public class GameFactory : MonoBehaviour
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Mud");
+        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Mud"); // ne vlijae na logikata
         singleTileScript.Initialize(MudSprite, "MudTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;

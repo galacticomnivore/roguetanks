@@ -5,12 +5,20 @@ public class SingleTile : MonoBehaviour
 {
     public List<StatEffect> StatEffects;
 
+    private void Start() // novo dodadeno
+    {
+        Debug.Log($"[UNIT TILE] {name} is a UnitTile");
+    }
+
     public void Initialize(Sprite sprite, string collisionLayer)
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) return;
         spriteRenderer.sprite = sprite;
+        gameObject.tag = "Tile"; // novo dodadeno
         gameObject.layer = LayerMask.NameToLayer(collisionLayer);
+
+        Debug.Log($"[TILE] {name} set to layer {collisionLayer} ({gameObject.layer})"); // novo dodadeno - funkcioniraat site tiles
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

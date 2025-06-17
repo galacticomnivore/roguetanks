@@ -19,9 +19,9 @@ public class GroupTile : MonoBehaviour
         Column = name.Split('_')[2].ToInt();
     }
 
-    public void Initialize(Sprite[] sprites, string collisionLayer, int strength)
+    public void Initialize(Sprite[] sprites, string[] collisionLayers, int strength)
     {
-        unitTiles.For((index, unitTile) => unitTile.Initialize(sprites[index], collisionLayer));
+        unitTiles.For((index, unitTile) => unitTile.Initialize(sprites[index], collisionLayers[index]));
         Strength = strength;
     }
 

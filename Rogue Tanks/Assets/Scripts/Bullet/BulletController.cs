@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -5,12 +6,33 @@ public class BulletController : MonoBehaviour
     private Bullet bullet;
     public Tank Tank { get; private set; }
     private int bulletStrength = 1;
-    
-    public BulletController InitializeBullet(Tank tank, float bulletSpeed)
+    private GameFactory gameFactory;
+    private BulletSprite bulletSprite;
+    private SpriteRenderer spriteRenderer;
+
+
+    public BulletType Type { get; private set; }
+    private Dictionary<BulletType, IBulletEffectHandler> effectHandlers;
+    public bool TryGetEffectHandler(out IBulletEffectHandler handler)
     {
+        return effectHandlers.TryGetValue(Type, out handler);
+    }
+
+    public BulletController InitializeBullet(Tank tank, float bulletSpeed, GameFactory gameFactory)
+    {
+        this.gameFactory = gameFactory;
+        bulletSprite = GetComponentInChildren<BulletSprite>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Tank = tank;
         bullet = new Bullet(GetComponent<BulletMovement>(), GetComponentInChildren<BulletSprite>().Initialize(this));
         bullet.Speed = bulletSpeed;
+        Type = BulletType.Standard;
+        
+
+        //effectHandlers = new Dictionary<BulletType, IBulletEffectHandler>
+        //{
+        //  // { BulletType.Mud, new MudBulletEffectHandler() },
+        //};
         gameObject.SetActive(false);
         return this;
     }
@@ -25,4 +47,37 @@ public class BulletController : MonoBehaviour
     public void FaceRight() => bullet.FaceRight();
     public void SetActiveAt(Vector3 position) => gameObject.SetActiveAt(position);
     public void Deactivate() => gameObject.SetActive(false);
+
+ 
+   public void ChangeType(BulletType newType)
+   {
+        Type = newType;
+        this.Type = newType;
+
+        if (spriteRenderer == null || gameFactory == null)
+            return;
+
+        switch (newType)
+        {
+            case BulletType.Fire:
+               spriteRenderer.sprite = gameFactory.FireBulletSprite; 
+               // spriteRenderer.color = Color.red; - Debugger, doesn't work
+                break;
+            case BulletType.Water:
+                spriteRenderer.sprite = gameFactory.WaterBulletSprite;
+                break;
+            case BulletType.Ice:
+                spriteRenderer.sprite = gameFactory.IceBulletSprite;
+                break;
+            case BulletType.Mud:
+                spriteRenderer.sprite = gameFactory.MudBulletSprite;
+                break;
+
+            default:
+                spriteRenderer.sprite = gameFactory.StandardBulletSprite;
+                break;
+        }
+   }
 }
+
+
