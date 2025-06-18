@@ -28,11 +28,6 @@ public class BulletController : MonoBehaviour
         bullet.Speed = bulletSpeed;
         Type = BulletType.Standard;
         
-
-        //effectHandlers = new Dictionary<BulletType, IBulletEffectHandler>
-        //{
-        //  // { BulletType.Mud, new MudBulletEffectHandler() },
-        //};
         gameObject.SetActive(false);
         return this;
     }
@@ -60,8 +55,8 @@ public class BulletController : MonoBehaviour
         switch (newType)
         {
             case BulletType.Fire:
-               spriteRenderer.sprite = gameFactory.FireBulletSprite; 
-               // spriteRenderer.color = Color.red; - Debugger, doesn't work
+                spriteRenderer.sprite = gameFactory.FireBulletSprite;
+                // spriteRenderer.color = Color.red;
                 break;
             case BulletType.Water:
                 spriteRenderer.sprite = gameFactory.WaterBulletSprite;
@@ -72,12 +67,13 @@ public class BulletController : MonoBehaviour
             case BulletType.Mud:
                 spriteRenderer.sprite = gameFactory.MudBulletSprite;
                 break;
-
+            case BulletType.Standard:
+                break;
             default:
                 spriteRenderer.sprite = gameFactory.StandardBulletSprite;
                 break;
         }
-   }
+    }
 }
 
 
