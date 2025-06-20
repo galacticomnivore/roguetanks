@@ -683,10 +683,10 @@ MonoBehaviour:
   LavaSprite: {fileID: 21300000, guid: d022252069a520d41929400f77a89867, type: 3}
   MudSprite: {fileID: 21300000, guid: fa5492fba052ca14c9a496061f63d6c7, type: 3}
   StandardBulletSprite: {fileID: 21300000, guid: 73861b71f1fe43548aeeb92d5a26be9a, type: 3}
-  FireBulletSprite: {fileID: 1477558315, guid: 22f1dd470acbaae42b7b7c1f5c9c47c2, type: 3}
-  WaterBulletSprite: {fileID: 1477558315, guid: 22f1dd470acbaae42b7b7c1f5c9c47c2, type: 3}
-  MudBulletSprite: {fileID: -1462022837, guid: 22f1dd470acbaae42b7b7c1f5c9c47c2, type: 3}
-  IceBulletSprite: {fileID: 1477558315, guid: 22f1dd470acbaae42b7b7c1f5c9c47c2, type: 3}
+  FireBulletSprite: {fileID: 21300000, guid: 34cc2243c37d222418c9df49a753251d, type: 3}
+  WaterBulletSprite: {fileID: 21300000, guid: 76b8ce9054413d54397903fd6e02f738, type: 3}
+  MudBulletSprite: {fileID: 21300000, guid: 730a75e4b42ed584e83c077ff7d1d848, type: 3}
+  IceBulletSprite: {fileID: 21300000, guid: ab29edbf29a0c174b99584500c5b7833, type: 3}
 --- !u!4 &641389330
 Transform:
   m_ObjectHideFlags: 0

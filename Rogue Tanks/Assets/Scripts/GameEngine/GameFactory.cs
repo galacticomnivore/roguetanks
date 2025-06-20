@@ -91,10 +91,10 @@ public class GameFactory : MonoBehaviour
         return groupTileScript;
     }
 
-    public GroupTile CreateBrick(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(BrickSprites.Get(0,1,4,5), new string[] { "Tile", "Tile", "Tile", "Tile" }, 1));
+    public GroupTile CreateBrick(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(BrickSprites.Get(0,1,4,5), new string[] { "BrickTile", "BrickTile", "BrickTile", "BrickTile" }, 1));
     public GroupTile CreateForest(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(ForestSprites.Get(0, 1, 4, 5), new string[] { "ForestTile", "ForestTile", "ForestTile", "ForestTile" },0));
     public GroupTile CreateWater(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(WaterSprites.Get(0, 1, 4, 5), new string[] { "WaterTile", "WaterTile", "WaterTile", "WaterTile" },0));
-    public GroupTile CreateStone(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(StoneWallSprites.Get(0, 1, 4, 5), new string[] { "Tile", "Tile", "Tile", "Tile" },2));
+    public GroupTile CreateStone(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(StoneWallSprites.Get(0, 1, 4, 5), new string[] { "SteelTile", "SteelTile", "SteelTile", "SteelTile" },2));
     public SingleTile CreateIce(Vector3 position, int row, int column)
     {
         Debug.Log($"[FACTORY] Creating ICE at {row},{column}"); // novo dodadeno 

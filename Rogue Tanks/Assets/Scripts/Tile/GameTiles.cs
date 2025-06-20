@@ -35,7 +35,7 @@ public class GameTiles : MonoBehaviour
         GameObject.Destroy(singleTile.gameObject);
     }
 
-    private void Hit(BulletController bullet, GroupTile groupTile, UnitTile unitTile)
+    public void Hit(BulletController bullet, GroupTile groupTile, UnitTile unitTile)
     {
         if (bullet.Strength < groupTile.Strength) return;
         bullet.Direction

@@ -10,7 +10,6 @@ public class BulletController : MonoBehaviour
     private BulletSprite bulletSprite;
     private SpriteRenderer spriteRenderer;
 
-
     public BulletType Type { get; private set; }
     private Dictionary<BulletType, IBulletEffectHandler> effectHandlers;
     public bool TryGetEffectHandler(out IBulletEffectHandler handler)
@@ -31,7 +30,6 @@ public class BulletController : MonoBehaviour
         gameObject.SetActive(false);
         return this;
     }
-
     public Vector3 Direction { get => bullet.Direction; }
     public int Strength { get => bulletStrength; }
     public void IncreaseBulletStrength() => bulletStrength++;
@@ -42,7 +40,6 @@ public class BulletController : MonoBehaviour
     public void FaceRight() => bullet.FaceRight();
     public void SetActiveAt(Vector3 position) => gameObject.SetActiveAt(position);
     public void Deactivate() => gameObject.SetActive(false);
-
  
    public void ChangeType(BulletType newType)
    {
