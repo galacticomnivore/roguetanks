@@ -101,7 +101,6 @@ public class GameFactory : MonoBehaviour
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Ice"); // novo dodadeno
         singleTileScript.Initialize(IceSprite, "IceTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
@@ -112,7 +111,6 @@ public class GameFactory : MonoBehaviour
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Lava"); // novo dodadeno 
         singleTileScript.Initialize(LavaSprite, "LavaTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;
@@ -122,7 +120,7 @@ public class GameFactory : MonoBehaviour
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
-        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Mud"); // ne vlijae na logikata
+        singleTileScript.StatEffects = TileStatEffects.Instance.GetStatEffectsForTile("Mud");
         singleTileScript.Initialize(MudSprite, "MudTile");
         gameEngine.GameTiles.Add(singleTileScript);
         return singleTileScript;

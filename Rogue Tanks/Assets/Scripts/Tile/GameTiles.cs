@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameTiles : MonoBehaviour
 {
-    private List<GroupTile> GroupTiles = new List<GroupTile>();
-    private List<SingleTile> SingleTiles = new List<SingleTile>();
+    public List<GroupTile> GroupTiles = new List<GroupTile>();
+    public List<SingleTile> SingleTiles = new List<SingleTile>();
 
     public void Add(GroupTile groupTile)
     {
@@ -25,12 +25,12 @@ public class GameTiles : MonoBehaviour
         SingleTiles.Clear();
     }
 
-    private void DestroyGroupTile(GroupTile groupTile)
+    public void DestroyGroupTile(GroupTile groupTile) // made public to use them in bullet-tile collision handler
     {
         groupTile.OnHit -= Hit;
         GameObject.Destroy(groupTile.gameObject);
     }
-    private void DestroySingleTile(SingleTile singleTile)
+    public void DestroySingleTile(SingleTile singleTile) // made public to use them in bullet-tile collision handler
     {
         GameObject.Destroy(singleTile.gameObject);
     }

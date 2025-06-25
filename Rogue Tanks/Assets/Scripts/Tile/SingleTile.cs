@@ -11,7 +11,6 @@ public class SingleTile : MonoBehaviour
         var spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer == null) return;
         spriteRenderer.sprite = sprite;
-        gameObject.tag = "Tile"; // novo dodadeno
         gameObject.layer = LayerMask.NameToLayer(collisionLayer);
 
         Debug.Log($"[TILE] {name} set to layer {collisionLayer} ({gameObject.layer})"); // novo dodadeno - funkcioniraat site tiles

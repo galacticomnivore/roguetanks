@@ -7,26 +7,18 @@ public class BulletController : MonoBehaviour
     public Tank Tank { get; private set; }
     private int bulletStrength = 1;
     private GameFactory gameFactory;
-    private BulletSprite bulletSprite;
     private SpriteRenderer spriteRenderer;
-
     public BulletType Type { get; private set; }
-    private Dictionary<BulletType, IBulletEffectHandler> effectHandlers;
-    public bool TryGetEffectHandler(out IBulletEffectHandler handler)
-    {
-        return effectHandlers.TryGetValue(Type, out handler);
-    }
+
 
     public BulletController InitializeBullet(Tank tank, float bulletSpeed, GameFactory gameFactory)
     {
         this.gameFactory = gameFactory;
-        bulletSprite = GetComponentInChildren<BulletSprite>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Tank = tank;
         bullet = new Bullet(GetComponent<BulletMovement>(), GetComponentInChildren<BulletSprite>().Initialize(this));
         bullet.Speed = bulletSpeed;
         Type = BulletType.Standard;
-        
         gameObject.SetActive(false);
         return this;
     }
@@ -53,7 +45,6 @@ public class BulletController : MonoBehaviour
         {
             case BulletType.Fire:
                 spriteRenderer.sprite = gameFactory.FireBulletSprite;
-                // spriteRenderer.color = Color.red;
                 break;
             case BulletType.Water:
                 spriteRenderer.sprite = gameFactory.WaterBulletSprite;
@@ -65,9 +56,10 @@ public class BulletController : MonoBehaviour
                 spriteRenderer.sprite = gameFactory.MudBulletSprite;
                 break;
             case BulletType.Standard:
+                spriteRenderer.sprite = gameFactory.StandardBulletSprite;
                 break;
             default:
-                spriteRenderer.sprite = gameFactory.StandardBulletSprite;
+                Debug.LogWarning($"Unhandled bullet type: {Type}");
                 break;
         }
     }
