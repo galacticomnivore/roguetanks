@@ -12,8 +12,6 @@ public class SingleTile : MonoBehaviour
         if (spriteRenderer == null) return;
         spriteRenderer.sprite = sprite;
         gameObject.layer = LayerMask.NameToLayer(collisionLayer);
-
-        Debug.Log($"[TILE] {name} set to layer {collisionLayer} ({gameObject.layer})"); // novo dodadeno - funkcioniraat site tiles
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

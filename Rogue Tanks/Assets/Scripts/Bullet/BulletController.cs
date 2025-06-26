@@ -62,7 +62,7 @@ public class BulletController : MonoBehaviour
                 Debug.LogWarning($"Unhandled bullet type: {Type}");
                 break;
         }
-    }
+   }
 }
 
 

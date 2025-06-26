@@ -97,7 +97,6 @@ public class GameFactory : MonoBehaviour
     public GroupTile CreateStone(Vector3 position, int row, int column) => CreateGroupTile(position, row, column, groupTile => groupTile.Initialize(StoneWallSprites.Get(0, 1, 4, 5), new string[] { "SteelTile", "SteelTile", "SteelTile", "SteelTile" },2));
     public SingleTile CreateIce(Vector3 position, int row, int column)
     {
-        Debug.Log($"[FACTORY] Creating ICE at {row},{column}"); // novo dodadeno 
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
@@ -107,7 +106,6 @@ public class GameFactory : MonoBehaviour
     }
     public SingleTile CreateLava(Vector3 position, int row, int column) // It's instantiated as Unit Tile instead of Single tile.
     {
-        Debug.Log($"[FACTORY] Creating LAVA at {row},{column}"); // novo dodadeno 
         var singleTile = Instantiate(SingleTilePrefab, position.AdjustForTank(), Quaternion.identity);
         singleTile.name = singleTile.name + $"_{row}_{column}";
         var singleTileScript = singleTile.GetComponent<SingleTile>();
