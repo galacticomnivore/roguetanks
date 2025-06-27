@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class TankStats : MonoBehaviour
@@ -12,36 +13,33 @@ public class TankStats : MonoBehaviour
     public int Points { get; private set; }
     public int Lives { get; private set; } = 1;
 
-    public float LavaTimer = 2f;
-
-    private int lavaTileCount = 0;
-    private float lavaStartTime = float.MinValue;
-
-    public int LavaTileCount
-    {
-        get => lavaTileCount;
-        set
-        {
-            lavaTileCount = value;
-            UpdateLava();
-        }
-    }
-
+    public List<SerializableEffectTile> PossibleEffectTiles = new List<SerializableEffectTile>();
     public List<StatEffect> StatEffects = new List<StatEffect>();
+
+    [ShowInInspector]
+    private Dictionary<string, EffectTile> effectTiles = new Dictionary<string, EffectTile>();
 
     public void Initialize(int tankType, int lives)
     {
-        this.TankType = tankType;
-        this.Lives = lives;
-        this.Tank = GetComponentInParent<Tank>();
+        TankType = tankType;
+        Lives = lives;
+        Tank = GetComponentInParent<Tank>();
+        effectTiles = new Dictionary<string, EffectTile>();
+        PossibleEffectTiles.ForEach(x => {
+            EffectTileAction action = x.EffectTileAction != null ? x.EffectTileAction.Clone() : null;
+            if(action != null) action.Init(this);
+            effectTiles.Add(x.Tile, new EffectTile(x.Effects, x.Duration, action));
+        });
     }
 
     void Update()
     {
-        if(lavaStartTime >= 0 && Time.time - lavaStartTime > LavaTimer)
+        foreach(var tile in effectTiles.Keys)
         {
-            HitTank();
-            ResetLava();
+            if(effectTiles[tile].IsCompleted(Time.time))
+            {
+                effectTiles[tile].Complete();
+            }
         }
     }
 
@@ -58,10 +56,18 @@ public class TankStats : MonoBehaviour
         onLiveAdd(Lives);
     }
 
+    public TankStats DecreaseLife()
+    {
+        Lives -= 1;
+        ResetEffects();
+        return this;
+    }
+
     public TankStats DecreaseLife(Action onDecreaseLife)
     {
         Lives -= 1;
         onDecreaseLife();
+        ResetEffects();
         return this;
     }
 
@@ -69,6 +75,7 @@ public class TankStats : MonoBehaviour
     {
         Lives -= 1;
         onLiveDecreased(Lives);
+        ResetEffects();
         return this;
     }
 
@@ -84,12 +91,11 @@ public class TankStats : MonoBehaviour
         return this;
     }
 
-    public void AddPoint(int destroyedTankType)=>
-        tankPoints.AddValue(destroyedTankType, 1);
+    public void AddPoint(int destroyedTankType) => tankPoints.AddValue(destroyedTankType, 1);
 
-    public void AddStatEffect(StatEffect statEffect, bool stackable = false)
+    public void AddStatEffect(StatEffect statEffect)
     {
-        if(stackable || !StatEffects.Exists(x => x.Tag == statEffect.Tag))
+        if(!StatEffects.Exists(x => x.Tag == statEffect.Tag))
         {
             StatEffects.Add(statEffect);
         }
@@ -105,9 +111,44 @@ public class TankStats : MonoBehaviour
         return StatEffects.Where(x => x.Type == type).ToList();
     }
 
-    public void UpdateLava() => lavaStartTime = lavaTileCount > 0 && lavaStartTime < 0 ? Time.time : float.MinValue;
-    public void ResetLava() => lavaStartTime = float.MinValue;
+    private void UpdateTileEffects()
+    {
+        foreach(var tile in effectTiles.Values)
+        {
+            if(tile.CanBeAdded())
+            {
+                tile.Effects.ForEach(x => AddStatEffect(x));
+            }
+            else if(tile.CanBeRemoved())
+            {
+                tile.Effects.ForEach(x => RemoveStatEffect(x.Tag));
+            }
+        }
+    }
 
-    public void IncrementLavaCounter() => LavaTileCount++;
-    public void DecrementLavaCounter() => LavaTileCount--;
+    private void ResetEffects()
+    {
+        foreach(var tile in effectTiles.Values)
+        {
+            tile.Reset();
+        }
+    }
+
+    public void AddTileCollision(string tile)
+    {
+        if(effectTiles.ContainsKey(tile))
+        {
+            effectTiles[tile].Increment();
+        }
+        UpdateTileEffects();
+    }
+
+    public void RemoveTileCollision(string tile)
+    {
+        if(effectTiles.ContainsKey(tile))
+        {
+            effectTiles[tile].Decrement();
+        }
+        UpdateTileEffects();
+    }
 }

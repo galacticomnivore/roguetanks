@@ -12,7 +12,16 @@ public class EnemyTank : BaseTank
 
     public override void DestroyTank() => gameEngine.ActiveGameObjectsController.DestroyTank(tank);
 
-    public override void TankIsHit(Action<int> onHit) =>
-        tankStats.DecreaseLife(()=>onHit(tankStats.TankType))
-        .TankHasNoMoreLivesLeft(DestroyTank);
+    public override void TankIsHit(Action<int> onHit)
+    {
+        if(onHit == null)
+        {
+            tankStats.DecreaseLife().TankHasNoMoreLivesLeft(DestroyTank);
+        }
+        else
+        {
+            tankStats.DecreaseLife(()=>onHit(tankStats.TankType))
+            .TankHasNoMoreLivesLeft(DestroyTank);
+        }
+    }
 }
