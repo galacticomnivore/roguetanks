@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameTiles : MonoBehaviour
 {
+    public Sprite normalTankSprite;
+    public Sprite tankLavaSprite;
+    public Sprite tankIceSprite;
+    public Sprite tankWaterSprite;
+    public Sprite tankMudSprite;
+    public Sprite tankForestSprite;
+
     private List<GroupTile> GroupTiles = new List<GroupTile>();
     private List<SingleTile> SingleTiles = new List<SingleTile>();
 

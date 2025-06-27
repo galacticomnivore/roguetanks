@@ -11,6 +11,7 @@ public class GameEngine : MonoBehaviour
     public GameTiles GameTiles { get; private set; }
     public GamePlayManager GamePlayManager { get; private set; }
     public ActiveGameObjectsController ActiveGameObjectsController { get; private set; }
+    public EnvironmentEffectsHandler EnvironmentEffectsHandler { get; private set; }
     private void Awake()
     {
         GameTiles = gameObject.GetComponent<GameTiles>();
@@ -19,6 +20,7 @@ public class GameEngine : MonoBehaviour
         GamePlayManager = gameObject.GetComponent<GamePlayManager>();
 
         ActiveGameObjectsController = new ActiveGameObjectsController(this);
+        EnvironmentEffectsHandler = new EnvironmentEffectsHandler(this);
         UpgradeBuilder = new UpgradeBuilder(this);
         LevelController = new LevelController(this);
         ScoreboardController = new ScoreboardController(this);
