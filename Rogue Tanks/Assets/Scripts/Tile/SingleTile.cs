@@ -15,15 +15,6 @@ public class SingleTile : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TankMovementController tank = collision.GetComponentInParent<TankMovementController>();
-        GameEngine engine = GameObject.FindAnyObjectByType<GameEngine>();
-        if (engine == null) return;
-        if (tank == null) return;
-
-        engine.EnvironmentEffectsHandler.HandleEnvirontmentEffect(gameObject, tank);
-
-        // Old code
-
         if (gameObject.layer == LayerMask.NameToLayer("IceTile"))
         {
             collision.gameObject.GetComponentInParent<TankMovementController>().SlideIn();
@@ -40,19 +31,18 @@ public class SingleTile : MonoBehaviour
                 StatEffects.ForEach(x => tankStats.AddStatEffect(x, false));
             }
         }
-    }
+        // New code
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
         TankMovementController tank = collision.GetComponentInParent<TankMovementController>();
         GameEngine engine = GameObject.FindAnyObjectByType<GameEngine>();
         if (engine == null) return;
         if (tank == null) return;
 
         engine.EnvironmentEffectsHandler.HandleEnvirontmentEffect(gameObject, tank);
-        
-        // Old code
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
         if (gameObject.layer == LayerMask.NameToLayer("IceTile"))
         {
             collision.gameObject.OnGetComponentInParent<TankMovementController>(movement => movement.SlideOut());
@@ -69,5 +59,14 @@ public class SingleTile : MonoBehaviour
                 StatEffects.ForEach(x => tankStats.RemoveStatEffect(x.Tag));
             }
         }
+
+        // New code
+
+        TankMovementController tank = collision.GetComponentInParent<TankMovementController>();
+        GameEngine engine = GameObject.FindAnyObjectByType<GameEngine>();
+        if (engine == null) return;
+        if (tank == null) return;
+
+        engine.EnvironmentEffectsHandler.HandleEnvirontmentEffect(gameObject, tank);
     }
 }
