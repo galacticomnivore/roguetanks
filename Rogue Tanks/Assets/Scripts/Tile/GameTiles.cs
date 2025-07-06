@@ -57,45 +57,42 @@ public class GameTiles : MonoBehaviour
 
     public void ChangeTileType(GameObject tileToReplace, string replacementTile)
     {
-        Component tileComponent = tileToReplace.GetComponent<SingleTile>()
-                           ?? (Component)tileToReplace.GetComponentInParent<GroupTile>();
-        if (tileComponent == null)
+        Component oldTileComponent = tileToReplace.GetComponent<SingleTile>()
+                                      ?? (Component)tileToReplace.GetComponentInParent<GroupTile>();
+        if (oldTileComponent == null)
         {
-            Debug.LogWarning("Tile neither single nor group tile - shouldn't be here");
+            Debug.LogWarning("Tile neither SingleTile nor GroupTile.");
             return;
         }
-        string[] parts = tileComponent.name.Split('_');
+
+        string[] parts = oldTileComponent.name.Split('_');
         int row = parts[1].ToInt();
         int column = parts[2].ToInt();
 
         if (tileCreationMap.TryGetValue(replacementTile, out var createTile))
-        {  
-            var newTile = createTile(tileToReplace.transform.position, row, column);
+        {
+            var newTileObj = createTile(tileToReplace.transform.position, row, column);
+            GameObject.Destroy(oldTileComponent.gameObject);
 
-            SwapTile(tileComponent, newTile);
+            // Decide which list to add to:
+            if (newTileObj is SingleTile singleTile)
+            {
+                singleTilesList.Add(singleTile);
+            }
+            else if (newTileObj is GroupTile groupTile)
+            {
+                groupTile.OnHit += Hit;
+                groupTilesList.Add(groupTile);
+            }
+            else
+            {
+                Debug.LogWarning("Replacement tile created an unknown type.");
+            }
         }
         else
         {
-            Debug.LogWarning($"Replacement tile type '{replacementTile}' not found in tileCreationMap.");
+            Debug.LogWarning($"Replacement tile '{replacementTile}' not found in map.");
         }
-    }
-    private void SwapTile<T1, T2>(T1 tileToRemove, T2 tileToAdd)
-    {
-        if (tileToRemove == null || tileToAdd == null)
-        {
-            Debug.LogWarning("Tile to remove or add is null.");
-            return;
-        }
-        var removeTileList = typeof(T1) == typeof(SingleTile)
-            ? (System.Collections.IList)(object)singleTilesList
-            : (System.Collections.IList)(object)groupTilesList;
-
-        var addTileList = typeof(T2) == typeof(SingleTile)
-            ? (System.Collections.IList)(object)singleTilesList
-            : (System.Collections.IList)(object)groupTilesList;
-        removeTileList.Remove(tileToRemove);
-        GameObject.Destroy(((Component)(object)tileToRemove).gameObject);
-        addTileList.Add(tileToAdd);
     }
 
     public void Hit(BulletController bullet, GroupTile groupTile, UnitTile unitTile)

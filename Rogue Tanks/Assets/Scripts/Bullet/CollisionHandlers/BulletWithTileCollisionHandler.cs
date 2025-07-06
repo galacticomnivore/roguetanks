@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class BulletWithTileCollisionHandler : ICollisionHandler
@@ -50,7 +49,6 @@ public class BulletWithTileCollisionHandler : ICollisionHandler
         string layerType = LayerMask.LayerToName(collision.gameObject.layer);
         var singleTile = collision.GetComponent<SingleTile>();
         var groupTile = collision.GetComponent<GroupTile>();
-        // Dictionary <bullet/tile - state, bullet result>
         BulletTilePair collisionData = new BulletTilePair(bulletController.Type, layerType);
         if (!bulletTileStateMap.ContainsKey(collisionData))
         {
@@ -66,26 +64,6 @@ public class BulletWithTileCollisionHandler : ICollisionHandler
         {
             gameTiles.ChangeTileType(collision.gameObject, collisionOutcomeData.tileName);
         }
-        //if (collisionOutcomeData.tileName != null)
-        //{
-        //    if (gameTiles == null)
-        //    {
-        //        gameTiles = GameObject.FindObjectOfType<GameTiles>();
-        //    }
-        //    if (singleTile != null)
-        //    {
-        //        gameTiles.DestroySingleTile(singleTile);
-        //    }
-        //    else if (groupTile != null)
-        //    {
-        //        gameTiles.DestroyGroupTile(groupTile);
-        //    }
-        //    var newTile = gameTiles.CreateTile(collisionOutcomeData.tileName, collision.transform.position);
-        //    if (newTile != null)
-        //    {
-        //        newTile.Initialize();
-        //    }
-        //}
     }
 }
 
