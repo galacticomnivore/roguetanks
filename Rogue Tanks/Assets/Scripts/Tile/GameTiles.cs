@@ -97,6 +97,7 @@ public class GameTiles : MonoBehaviour
 
     public void Hit(BulletController bullet, GroupTile groupTile, UnitTile unitTile)
     {
+        Debug.Log("TEST!!");
         if (bullet.Strength < groupTile.Strength) return;
         bullet.Direction
             .OnVertical(() =>

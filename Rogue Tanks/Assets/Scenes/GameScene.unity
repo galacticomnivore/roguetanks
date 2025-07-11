@@ -750,6 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869370fe277463c4299d1f903b5ab835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groupTilesList: []
+  singleTilesList: []
 --- !u!114 &641389336
 MonoBehaviour:
   m_ObjectHideFlags: 0

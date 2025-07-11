@@ -52,7 +52,7 @@ public class BulletWithTileCollisionHandler : ICollisionHandler
         BulletTilePair collisionData = new BulletTilePair(bulletController.Type, layerType);
         if (!bulletTileStateMap.ContainsKey(collisionData))
         {
-            Debug.LogWarning($"No collision data found for bullet type {bulletController.Type} and tile layer {layerType}");
+          //  Debug.LogWarning($"No collision data found for bullet type {bulletController.Type} and tile layer {layerType}");
             return;
         }
         BulletTilePair collisionOutcomeData = bulletTileStateMap[collisionData];
