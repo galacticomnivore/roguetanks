@@ -13,7 +13,7 @@ public class GameStartEngine : MonoBehaviour
 
     void Start()
     {
-        TankImage.rectTransform.position = new Vector3(TankImage.rectTransform.position.x, OnePlayer.rectTransform.position.y, 0);
+       // TankImage.rectTransform.position = new Vector3(TankImage.rectTransform.position.x, OnePlayer.rectTransform.position.y, 0);
         UpdateLevelText();
     }
 

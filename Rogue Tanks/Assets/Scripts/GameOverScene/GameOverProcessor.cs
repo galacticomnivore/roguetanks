@@ -23,16 +23,16 @@ public class GameOverProcessor : MonoBehaviour
     int totalTanksKilled = 0;
     void Start()
     {
-        HighScore.text = GameStatistics.HiScore.ToString();
-        Stage.text = $"STAGE   {GameStatistics.StageNumber}";
-        int totalPlayerPoints = 0;
-        GameStatistics.ForEachStat((tankType, killedEnemies, pointsPerEnemy) =>
-        {
-            totalPlayerPoints += (killedEnemies * pointsPerEnemy);
-            totalTanksKilled += killedEnemies;
-        });
-        Player1HighScore.text = totalPlayerPoints.ToString();
-        StartCoroutine(Count6Enemies());
+        //HighScore.text = GameStatistics.HiScore.ToString();
+        //Stage.text = $"STAGE   {GameStatistics.StageNumber}";
+        //int totalPlayerPoints = 0;
+        //GameStatistics.ForEachStat((tankType, killedEnemies, pointsPerEnemy) =>
+        //{
+        //    totalPlayerPoints += (killedEnemies * pointsPerEnemy);
+        //    totalTanksKilled += killedEnemies;
+        //});
+        //Player1HighScore.text = totalPlayerPoints.ToString();
+        //StartCoroutine(Count6Enemies());
     }
 
     IEnumerator Count6Enemies()

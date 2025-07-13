@@ -10,6 +10,7 @@
 /Rogue Tanks/[Ll]ogs/
 /Rogue Tanks/[Mm]emoryCaptures/
 /Rogue Tanks/[Uu]serSettings/
+/Rogue Tanks/[Aa]ssets/TextMesh Pro/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !Rogue Tanks/[Aa]ssets/**/*.meta
@@ -43,6 +44,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.meta
 
 # Unity3D generated meta files
 *.pidb.meta
