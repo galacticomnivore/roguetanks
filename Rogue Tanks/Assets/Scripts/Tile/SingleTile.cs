@@ -5,6 +5,7 @@ public class SingleTile : MonoBehaviour
 {
     public List<StatEffect> StatEffects;
 
+
     public void Initialize(Sprite sprite, string collisionLayer)
     {
         var spriteRenderer = GetComponent<SpriteRenderer>();
@@ -17,11 +18,19 @@ public class SingleTile : MonoBehaviour
     {
         if(gameObject.layer == LayerMask.NameToLayer("IceTile"))
         {
-            collision.gameObject.GetComponentInParent<TankMovementController>().SlideIn();
+            var movement = collision.gameObject.GetComponentInParent<TankMovementController>();
+            
+            if (movement != null)
+            {
+                movement.SlideIn();
+            }
         }
         else if(gameObject.layer == LayerMask.NameToLayer("LavaTile"))
         {
-            collision.gameObject.GetComponentInChildren<TankStats>().IncrementLavaCounter();
+            var stats = collision.gameObject.GetComponentInChildren<TankStats>(); if (stats != null)
+            {
+                stats.IncrementLavaCounter();
+            }
         }
         else if(gameObject.layer == LayerMask.NameToLayer("MudTile"))
         {
@@ -37,11 +46,19 @@ public class SingleTile : MonoBehaviour
     {
         if(gameObject.layer == LayerMask.NameToLayer("IceTile"))
         {
-            collision.gameObject.OnGetComponentInParent<TankMovementController>(movement => movement.SlideOut());
+            var movement = collision.gameObject.GetComponentInParent<TankMovementController>();
+            if (movement != null)
+            {
+                movement.SlideOut();
+            }
         }
         else if(gameObject.layer == LayerMask.NameToLayer("LavaTile"))
         {
-            collision.gameObject.GetComponentInChildren<TankStats>().DecrementLavaCounter();
+            var stats = collision.gameObject.GetComponentInChildren<TankStats>();
+            if (stats != null)
+            {
+                stats.DecrementLavaCounter();
+            }
         }
         else if(gameObject.layer == LayerMask.NameToLayer("MudTile"))
         {

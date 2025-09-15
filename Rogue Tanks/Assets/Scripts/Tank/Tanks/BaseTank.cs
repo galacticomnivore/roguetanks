@@ -31,7 +31,7 @@ public abstract class BaseTank
         tankMovementController.SpriteController = spriteController;
         tankMovementController.TankStats = tankStats;
 
-        spriteController.Raycasts.SetCollisionMasks("Ground", "Player", "Enemy", "Tile", "WaterTile");
+        spriteController.Raycasts.SetCollisionMasks("Ground", "Player", "Enemy", "Tile", "WaterTile", "BrickTile", "SteelTile");
     }
 
     public abstract void CanGetUpgrade(Action onCanGetUpgrade);

@@ -23,7 +23,7 @@ public class TankMovementController : MonoBehaviour
                     speed = effects[i].CalculateValue(speed);
                 }
             }
-            Debug.Log($"[Tank] Speed: {speed}");
+          //  Debug.Log($"[Tank] Speed: {speed}");
             return speed;
         }
     }
